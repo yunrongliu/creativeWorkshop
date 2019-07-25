@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="GBK">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            border: #ee8262 2px solid;
+        }
+        .signContainer{
+            width: 230px;
+            height: 130px;
+            border: #333 2px solid;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+</head>
+<body>
+    <div class="container" id="cont">
+        <canvas id="sign" class="signContainer"></canvas>
+        <button type="button" style="background: #ee8262;color:aliceblue;width:120px;height:30px" id="trigger">生成图像</button>
+        <div class="signContainer">
+            <img id="img" style="width:230px;height:130px;" />
+        </div>
+    </div>
+    <!-- <script src="./index.js"></script> -->
+    <script>
+    window.onload = function(){
+        var leftOff = 0
+        var topOff = 0
+        document.body.addEventListener('touchstart',function(ev){
+            ev.preventDefault()
+        },{ passive: false })
+        /** @type {HTMLCanvasElement} */
+        var cont = document.getElementById('cont')
+        var sign = document.getElementById('sign')
+        var context = sign.getContext('2d')
+        context.lineWidth = 3
+        context.shadowBlue = 2
+        context.shadowColor = '#878787'
+        context.strokeStyle = '#878787'
+        context.fillStyle = '#EEEEE0'
+        context.fillRect(0,0,1000,1000)
+        sign.addEventListener('touchstart',function(ev){
+            var target = ev.target
+            var touch = ev.targetTouches[0]
+            var x = touch.clientX
+            var y = touch.clientY
+            width = cont.offsetLeft
+            height = cont.offsetTop
+            var canvasX = x - width + leftOff
+            var canvasY = y - height + topOff
+            context.beginPath()
+            context.moveTo(canvasX,canvasY)
+            sign.addEventListener('touchmove',function(ev){
+                var touch2 = ev.targetTouches[0]
+                var x2 = touch2.clientX
+                var y2 = touch2.clientY
+                var canvasX2 = x2 - width + leftOff
+                var canvasY2 = y2 - height + topOff
+                context.lineTo(canvasX2,canvasY2)
+                context.stroke()
+            },{passive: true})
+            sign.addEventListener('touchend',function(ev){
+                leftOff = ~~(canvasX/3)
+                topOff = ~~(canvasY/6)
+                sign.addEventListener('touchmove',function(ev){
+                    
+                },{passive: true})
+            },{passive: true})
+        },{passive: true})
+        document.getElementById('trigger').addEventListener('touchstart',function(ev){
+            var url= sign.toDataURL('image/png')
+            console.log(url)
+            document.getElementById('img').src = url
+        })
+    }
+    
+    </script>
+</body>
+</html>

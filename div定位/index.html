@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="GBK">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      *{
+				margin: 0;
+				padding: 0;
+	  	}
+			.container{
+				width: 1000px;
+				margin: 0 300px 200px 300px;
+				overflow: auto;
+			}
+			.container>div{
+				white-space: nowrap;
+				font-size: 0;
+			}
+			.container>div>p{
+				font-size: 14px;
+				display: inline-block;
+				width: 80px;
+				height: 30px;
+				margin: 5px 10px 5px 10px;
+				border: #333 1px solid;
+			}
+			 .findOut{
+				animation: blink 1.5s infinite;
+			 }
+			 @keyframes blink{
+				 0%{
+					 background: #BA55D3;
+				 }
+				 80%{
+					background: #fff;
+				 }
+				 100%{
+					background: #BA55D3;
+				 }
+			 }
+	    </style>
+</head>
+<body>
+		<div style="padding: 100px 0 0 100px;">
+			<input id="searchInfo_hgn" type="text" style="width: 120px;height: 30px;vertical-align: middle;">
+			<button type="button" style="border-radius: 5px;color: #fff;border: 0;background-color: #8470FF;width: 80px;height:30px;vertical-align: middle;" onclick="decidePosition()">查询</button>
+		</div>
+		<div id="container" class="container">
+
+		</div>
+		
+		<script type="text/javascript">
+		    var lastId = ''
+			var finalHtml = ''
+			for(var i=0;i<12;i++){
+				finalHtml += '<div>'
+				for(var j=0;j<60;j++){
+					finalHtml += '<p id="A01120'+(turnToTwoPlace(i)+turnToTwoPlace(j))+'" class="findBait" WH_LOCATION_NO="A01120'+(turnToTwoPlace(i)+turnToTwoPlace(j))+'" ROW_NO="'+(turnToTwoPlace(i))+'" COLUMN_NO="'+(turnToTwoPlace(j))+'" LAYER_NO="1" ROADWAY_NO="1" LAYER_NO="1"></p>'
+				}
+				finalHtml += '</div>'
+			}
+			document.getElementById('container').innerHTML = finalHtml
+
+			function decidePosition(){
+				var goodsLocationNO = document.getElementById('searchInfo_hgn').value 
+				if(lastId) document.getElementById(lastId).classList.remove('findOut')
+				var $dom = document.getElementById(goodsLocationNO)//获取对象
+				var $div = document.getElementById('container')// 获取容器 
+				console.log($div.scrollLeft)
+				$dom.classList.add('findOut')
+				var rowNum = $dom.getAttribute('ROW_NO') //行号
+				var cellNum = $dom.getAttribute('COLUMN_NO') //列号
+				var rankNum = $dom.getAttribute('LAYER_NO') //排号
+				var distance = countDistance(cellNum)
+				$div.scrollLeft = distance 
+				lastId = goodsLocationNO
+			}
+			//计算距离
+			function countDistance(cellNO){
+				return cellNO*100 - 400
+			}
+			//小于10补0
+			function turnToTwoPlace(num){
+				if(num<10){
+					 return '0'+num
+				}
+				return num
+			}
+
+		</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            background-color:skyblue;
+        }
+        .cloud{
+            width: 500px;
+            height: 275px;
+            border-radius: 50%;
+            position: absolute;
+            top: -28vh;
+            left: -10vw;
+            /* animation: move 50s infinite; */
+        }
+        .cloud-back{
+            filter: url(#back);
+            box-shadow: 300px 300px 30px -20px #fff;
+        }
+        .cloud-mid{
+            filter: url(#mid);
+            box-shadow: 300px 340px 70px -60px rgba(174,238,238,.1);
+        }
+        .cloud-front{
+            filter: url(#front);
+            box-shadow: 300px 370px 60px -100px rgba(0, 0, 0, 0.3);
+        }
+        .sunContainer{
+            position: absolute;
+            right: 50px;
+            top: 60px;
+        }
+        .sun{
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #EEE685;
+            filter: url(#sun);
+            box-shadow: 0 0 80px 50px rgba(238,233,191, 0.8);
+        }
+        @keyframes move{
+            from{
+                left: -10vw;
+            }
+            to{
+                left: 40vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article class="cloudContainer">
+        <section class="cloudCont">
+            <div class="cloud cloud-back"></div>
+            <div class="cloud cloud-mid"></div>
+            <div class="cloud cloud-front"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -15vh;left: -5vw;"></div>
+            <div class="cloud cloud-mid" style="top: -15vh;left: -5vw;"></div>
+            <div class="cloud cloud-front" style="top: -15vh;left: -5vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -23vh;left: 10vw;"></div>
+            <div class="cloud cloud-mid" style="top: -23vh;left: 10vw;"></div>
+            <div class="cloud cloud-front" style="top: -23vh;left: 10vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -32vh;left: 15vw;"></div>
+            <div class="cloud cloud-mid" style="top: -32vh;left: 15vw;"></div>
+            <div class="cloud cloud-front" style="top: -32vh;left: 15vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -36vh;left: 20vw;"></div>
+            <div class="cloud cloud-mid" style="top: -36vh;left: 20vw;"></div>
+            <div class="cloud cloud-front" style="top: -36vh;left: 20vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -30vh;left: 25vw;"></div>
+            <div class="cloud cloud-mid" style="top: -30vh;left: 25vw;"></div>
+            <div class="cloud cloud-front" style="top: -30vh;left: 25vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -20vh;left: 25vw;"></div>
+            <div class="cloud cloud-mid" style="top: -20vh;left: 25vw;"></div>
+            <div class="cloud cloud-front" style="top: -20vh;left: 25vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -30vh;left: 35vw;"></div>
+            <div class="cloud cloud-mid" style="top: -30vh;left: 35vw;"></div>
+            <div class="cloud cloud-front" style="top: -30vh;left: 35vw;"></div>
+        </section>
+        <section class="cloudCont">
+            <div class="cloud cloud-back" style="top: -20vh;left: 40vw;"></div>
+            <div class="cloud cloud-mid" style="top: -20vh;left: 40vw;"></div>
+            <div class="cloud cloud-front" style="top: -20vh;left: 40vw;"></div>
+        </section>
+    </article>
+    <aside class="sunContainer">
+        <div class="sun"></div>
+    </aside>
+    
+    <svg width="0" height="0">
+        <filter id="back">
+            <feTurbulence baseFrequency="0.012" numOctaves="4"  type="fractalNoise" seed="0"/>
+            <feDisplacementMap in="SourceGraphic" scale="170">
+                <animate attributeName="scale" id="first" begin="0s;second.end" from="170" to="80" dur="50s" ></animate>
+                <animate attributeName="scale" id="second" begin="first.end" from="80" to="170" dur="50s" ></animate>
+            </feDisplacementMap>
+        </filter>
+        <filter id="mid">
+            <feTurbulence baseFrequency="0.012" numOctaves="2"  type="fractalNoise" seed="0"/>
+            <feDisplacementMap in="SourceGraphic" scale="150">
+                <animate attributeName="scale" id="first1" begin="0s;second1.end" from="140" to="60" dur="50s" ></animate>
+                <animate attributeName="scale" id="second1" begin="first1.end" from="60" to="140" dur="50s" ></animate>
+            </feDisplacementMap>
+        </filter>
+        <filter id="front">
+            <feTurbulence baseFrequency="0.012" numOctaves="2"  type="fractalNoise" seed="0"/>
+            <feDisplacementMap in="SourceGraphic" scale="100" >
+                <animate attributeName="scale" id="first2" begin="0s;second2.end" from="110" to="40" dur="50s" ></animate>
+                <animate attributeName="scale" id="second2" begin="first2.end" from="40" to="110" dur="50s" ></animate>
+            </feDisplacementMap>
+        </filter>
+        <filter id="sun">
+            <feTurbulence baseFrequency="0.012" numOctaves="2"  type="fractalNoise" seed="0"/>
+            <feDisplacementMap in="SourceGraphic" scale="20" />
+        </filter>
+    </svg>
+</body>
+</html>

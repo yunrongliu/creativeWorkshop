@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="table.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <table class="table" style="table-layout: fixed;width:600px;" id="table">
+            <thead class="thead-main">
+                <tr>
+                    <th style="height: 50px">电压（V）</th>
+                    <th id="range">量程（A）</th>
+                    <th>电流（A）</th>
+                    <th>功率因数COSφ</th>
+                    <th>相对误差（%）</th>
+                </tr>
+            </thead>
+            <tbody id="main">
+            
+            </tbody>
+        </table>
+    </div>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+    window.onload = function(){
+        // var data = {
+        //     "code": 200,
+        //     "data": {
+        //         "docData": [
+        //             ["220", "1", "0.2", "0.8C", "0.015"],
+        //             ["220", "1", "0.2", "0.5L", "-0.010"],
+        //             ["220", "1", "0.1", "1.0", "0.000"],
+        //             ["220", "1", "0.5", "0.8C", "0.005"],
+        //             ["220", "1", "0.5", "0.5L", "0.005"],
+        //             ["220", "1", "0.5", "1.0", "0.005"],
+        //             ["220", "1", "1", "0.8C", "0.010"],
+        //             ["220", "1", "1", "0.5L", "0.005"],
+        //             ["220", "1", "1", "1.0", "0.010"],
+        //             ["220", "10", "2", "0.8C", "0.000"],
+        //             ["220", "10", "2", "0.5L", "-0.010"],
+        //             ["220", "10", "2", "1.0", "-0.005"],
+        //             ["220", "10", "5", "0.8C", "0.000"],
+        //             ["220", "10", "5", "0.5L", "0.005"],
+        //             ["220", "10", "5", "1.0", "0.000"],
+        //             ["220", "10", "10", "0.8C", "0.010"],
+        //             ["220", "10", "10", "0.5L", "-0.005"],
+        //             ["220", "10", "10", "1.0", "0.005"],
+        //             ["220", "100", "20", "0.8C", "0.010"],
+        //             ["220", "100", "20", "0.5L", "0.010"],
+        //             ["220", "100", "20", "1.0", "0.010"],
+        //             ["220", "100", "50", "0.8C", "0.010"],
+        //             ["220", "100", "50", "0.5L", "0.010"],
+        //             ["220", "100", "50", "1.0", "0.015"],
+        //             ["220", "100", "100", "0.8C", "0.000"],
+        //             ["220", "100", "100", "0.5L", "0.005"],
+        //             ["220", "100", "100", "1.0", "0.010"]
+        //         ],
+        //         "province": "BJ"
+        //     },
+        //     "message": "OK"
+        // }
+        var data = {
+            "code": 200,
+            "data": {
+                "docData": [
+                    ["220", "0.2", "0.8C", "0.015"],
+                    ["220", "0.2", "0.5L", "-0.010"],
+                    ["220", "0.1", "1.0", "0.000"],
+                    ["220", "0.5", "0.8C", "0.005"],
+                    ["220", "0.5", "0.5L", "0.005"],
+                    ["220", "0.5", "1.0", "0.005"],
+                    ["220", "1", "0.8C", "0.010"],
+                    ["220", "1", "0.5L", "0.005"],
+                    ["220", "1", "1.0", "0.010"],
+                    ["220", "2", "0.8C", "0.000"],
+                    ["220", "2", "0.5L", "-0.010"],
+                    ["220", "2", "1.0", "-0.005"],
+                    ["220", "5", "0.8C", "0.000"],
+                    ["220", "5", "0.5L", "0.005"],
+                    ["220", "5", "1.0", "0.000"],
+                    ["220", "10", "0.8C", "0.010"],
+                    ["220", "10", "0.5L", "-0.005"],
+                    ["220", "10", "1.0", "0.005"],
+                    ["220", "20", "0.8C", "0.010"],
+                    ["220", "20", "0.5L", "0.010"],
+                    ["220", "20", "1.0", "0.010"],
+                    ["210", "50", "0.8C", "0.010"],
+                    ["210", "50", "0.5L", "0.010"],
+                    ["210", "50", "1.0", "0.015"],
+                    ["210", "100", "0.8C", "0.000"],
+                    ["210", "100", "0.5L", "0.005"],
+                    ["210", "100", "1.0", "0.010"]
+                ],
+                "province": "BJ"
+            },
+            "message": "OK"
+        }
+        data = JSON.parse(JSON.stringify(data))
+        var docData = data.data.docData
+        if(docData[0].length==5){
+            $('#range').show()
+            makeFiveTableCont(docData)
+            dealTable(3)
+        }else{
+            $('#range').hide()
+            makeFourTableCont(docData)
+            dealTable(2)
+        }
+    }
+    //制作5列表格
+    function makeFiveTableCont(data){
+        var html = ''
+        for(var i=0;i<data.length;i++){
+            html += '<tr>'
+            html += '<td style="height: 25px;" key="'+(data[i][0])+'">'+data[i][0]+'</td>'
+            html += '<td key="'+(data[i][0]+data[i][1])+'">'+data[i][1]+'</td>'
+            html += '<td key="'+(data[i][0]+data[i][1]+data[i][2])+'">'+data[i][2]+'</td>'
+            html += '<td>'+data[i][3]+'</td>'
+            html += '<td>'+data[i][4]+'</td>'
+        }
+        $('#main').html(html)
+    }
+    //制作4列表格
+    function makeFourTableCont(data){
+        var html = ''
+        for(var i=0;i<data.length;i++){
+            html += '<tr>'
+            html += '<td style="height: 25px;" key="'+(data[i][0])+'">'+data[i][0]+'</td>'
+            html += '<td key="'+(data[i][0]+data[i][1])+'">'+data[i][1]+'</td>'
+            html += '<td>'+data[i][2]+'</td>'
+            html += '<td>'+data[i][3]+'</td>'
+        }
+        $('#main').html(html)
+    }
+    //合并单元格
+    function dealTable(colL){
+        var table = document.getElementById('table')
+        var i,j 
+        var row = table.rows.length // 需要合并的行
+        var col = table.rows[1].cells.length //需要合并的列 
+        var series1 = null
+        var series2 = null
+        for(i=1;i<row;i++){
+            for(j=0;j<col;j++){
+                table.rows[i].cells[j].id = "tb__" + i + "_" + j;
+            }
+        }
+        for(var r=0;r<col;r++){
+            if(r==colL){
+                break;
+            }else{
+                series1 = document.getElementById("tb__1_" + r)
+                for(var n=2;n<row;n++){
+                    series2 = document.getElementById("tb__" + n + "_" + r)
+                    if(series1.getAttribute('key') == series2.getAttribute('key')){
+                        series1.rowSpan++
+                        series2.parentNode.removeChild(series2)
+                    }else{
+                        series1 = document.getElementById("tb__" + n + "_" + r)
+                    }
+                }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
