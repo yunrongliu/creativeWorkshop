@@ -20,21 +20,21 @@
             height: 275px;
             border-radius: 50%;
             position: absolute;
-            top: -28vh;
+            top: -45vh;
             left: -10vw;
-            /* animation: move 50s infinite; */
+            animation: move 25s infinite;
         }
         .cloud-back{
             filter: url(#back);
-            box-shadow: 300px 300px 30px -20px #fff;
+            box-shadow: 200px 300px 30px -20px #fff;
         }
         .cloud-mid{
             filter: url(#mid);
-            box-shadow: 300px 340px 70px -60px rgba(174,238,238,.1);
+            box-shadow: 200px 340px 70px -60px rgba(174,238,238,.1);
         }
         .cloud-front{
             filter: url(#front);
-            box-shadow: 300px 370px 60px -100px rgba(0, 0, 0, 0.3);
+            box-shadow: 200px 370px 60px -100px rgba(0, 0, 0, 0.3);
         }
         .sunContainer{
             position: absolute;
@@ -66,7 +66,7 @@
             <div class="cloud cloud-mid"></div>
             <div class="cloud cloud-front"></div>
         </section>
-        <section class="cloudCont">
+        <!-- <section class="cloudCont">
             <div class="cloud cloud-back" style="top: -15vh;left: -5vw;"></div>
             <div class="cloud cloud-mid" style="top: -15vh;left: -5vw;"></div>
             <div class="cloud cloud-front" style="top: -15vh;left: -5vw;"></div>
@@ -105,7 +105,7 @@
             <div class="cloud cloud-back" style="top: -20vh;left: 40vw;"></div>
             <div class="cloud cloud-mid" style="top: -20vh;left: 40vw;"></div>
             <div class="cloud cloud-front" style="top: -20vh;left: 40vw;"></div>
-        </section>
+        </section> -->
     </article>
     <aside class="sunContainer">
         <div class="sun"></div>
@@ -115,22 +115,22 @@
         <filter id="back">
             <feTurbulence baseFrequency="0.012" numOctaves="4"  type="fractalNoise" seed="0"/>
             <feDisplacementMap in="SourceGraphic" scale="170">
-                <animate attributeName="scale" id="first" begin="0s;second.end" from="170" to="80" dur="50s" ></animate>
-                <animate attributeName="scale" id="second" begin="first.end" from="80" to="170" dur="50s" ></animate>
+                <!-- <animate attributeName="scale" id="first" begin="0s;second.end" from="170" to="80" dur="50s" ></animate>
+                <animate attributeName="scale" id="second" begin="first.end" from="80" to="170" dur="50s" ></animate> -->
             </feDisplacementMap>
         </filter>
         <filter id="mid">
             <feTurbulence baseFrequency="0.012" numOctaves="2"  type="fractalNoise" seed="0"/>
             <feDisplacementMap in="SourceGraphic" scale="150">
-                <animate attributeName="scale" id="first1" begin="0s;second1.end" from="140" to="60" dur="50s" ></animate>
-                <animate attributeName="scale" id="second1" begin="first1.end" from="60" to="140" dur="50s" ></animate>
+                <!-- <animate attributeName="scale" id="first1" begin="0s;second1.end" from="140" to="60" dur="50s" ></animate>
+                <animate attributeName="scale" id="second1" begin="first1.end" from="60" to="140" dur="50s" ></animate> -->
             </feDisplacementMap>
         </filter>
         <filter id="front">
             <feTurbulence baseFrequency="0.012" numOctaves="2"  type="fractalNoise" seed="0"/>
             <feDisplacementMap in="SourceGraphic" scale="100" >
-                <animate attributeName="scale" id="first2" begin="0s;second2.end" from="110" to="40" dur="50s" ></animate>
-                <animate attributeName="scale" id="second2" begin="first2.end" from="40" to="110" dur="50s" ></animate>
+                <!-- <animate attributeName="scale" id="first2" begin="0s;second2.end" from="110" to="40" dur="50s" ></animate>
+                <animate attributeName="scale" id="second2" begin="first2.end" from="40" to="110" dur="50s" ></animate> -->
             </feDisplacementMap>
         </filter>
         <filter id="sun">
@@ -138,5 +138,10 @@
             <feDisplacementMap in="SourceGraphic" scale="20" />
         </filter>
     </svg>
+
+
+    <script type="text/javascript">
+        
+    </script>
 </body>
 </html>
